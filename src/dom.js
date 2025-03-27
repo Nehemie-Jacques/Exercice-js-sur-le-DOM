@@ -16,10 +16,11 @@ for(let i = 0; i < 10; i++){
 body.prepend(question2);
 console.log(body.innerHTML);
 
+const couleur = ["green", "red", "yellow", "purple", "pink", "brown", "gray", "orange", "gold", "beige", "sliver"];
 const question3 = document.getElementById("tableau");
 const cellule = document.getElementsByTagName("td");
 for(let i = 0; i < cellule.length; i++){
-    cellule[i].style.backgroundColor = "green";
+    cellule[i].style.backgroundColor = couleur[Math.floor(Math.random() * couleur.length)];
 }
  
 const question4 = document.getElementById("parent");
@@ -93,18 +94,37 @@ console.log(listelement.lastElementChild.textContent);
 
 const inverser = document.getElementById("inverser");   
 const inverserli = inverser.children;
+
 inverser.insertBefore(inverserli[1], inverserli[0]);
 
 const suppsuivant = document.getElementById("suppsuivant");
-suppsuivant.nextElementSibling.remove();const nextelt = cloner.nextElementSibling;
+suppsuivant.nextElementSibling.remove();
 
 
 const cloner = document.getElementById("dupliquer");
 const dupliquer = cloner.cloneNode(true);
-cloner.nextElementSibling.remove();
-console.log(dupliquer);
+cloner.parentNode.insertBefore(dupliquer, cloner.nextSibling);
+console.log(dupliquer); 
 
-// const question3 = document.getElementById("tableau");
+// Exercise 4
+
+const transformer = [
+    ['Nom', 'Age'],
+    ['Alice', 25],
+    ['Bob', 30]
+];
+const creerTable = document.createElement("table");
+for(let i = 0; i < transformer.length; i++){
+    const ligne = document.createElement("tr");
+    for(let j = 0; j < transformer[i].length; j++){
+        const cellule = i === 0 ?document.createElement("th") : document.createElement("td"); 
+        cellule.textContent = transformer[i][j];
+        ligne.appendChild(cellule);
+    }
+    creerTable.appendChild(ligne);
+}
+body.appendChild(creerTable);
+
 const newligne = document.createElement("tr");
 question3.appendChild(newligne);
 const contenu1 = document.createElement("td");
@@ -121,5 +141,34 @@ console.log(contenu1);
 console.log(contenu2);
 console.log(contenu3);
 
-const trouver = ["A", "B", "C"];
+const trouver = document.querySelectorAll(".found li");
+for(let i = 0; i < trouver.length; i++){
+    if(trouver[i].textContent === "B"){
+        trouver[i].style.fontWeight = "bold";
+        break;
+    }
+}
 
+const tableau1 = ["Rouge", "Vert"];
+const tableau2 =  ["Bleu", "Jaune"];
+const tableau3 = tableau1.concat(tableau2);
+console.log(tableau3);
+const ultableau = document.createElement("ul");
+for(let i = 0; i < tableau3.length; i++){
+    const litableau = document.createElement("li");
+    litableau.textContent = tableau3[i];
+    ultableau.appendChild(litableau);
+}
+body.appendChild(ultableau);
+
+const indivus = [
+    {nom: "Alice", age: 25},
+    {nom: "Bob", age: 30}
+];
+const ulIndividu = document.createElement("ul");
+for(let i = 0; i < indivus.length; i++){
+    const liIndividu = document.createElement("li");
+    liIndividu.textContent = `${indivus[i].nom} ${indivus[i].age}`
+    ulIndividu.appendChild(liIndividu);
+}
+body.appendChild(ulIndividu);
